@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float _timePunch = 2;
     public BoxCollider2D collider;
     public int enemyLevel = 1;
+    public int enemyCount = 1;
+
 
    /*  public bool _isWalk;
     private int _punchCount = 0;
@@ -139,8 +141,8 @@ public class EnemyController : MonoBehaviour
 
     void FollowPlayer()
     {
-
-        if(Vector2.Distance(transform.position, _oPlayer.transform.position) > _attackDistance) {
+        EnemyHealth enemyHealth = gameObject.GetComponent<EnemyHealth>();
+        if(Vector2.Distance(transform.position, _oPlayer.transform.position) > _attackDistance && enemyHealth.health > 0) {
            _enemyDirection = (_oPlayer.transform.position - transform.position).normalized;
            _enemyRigidbody2D.velocity = _enemyDirection * _enemySpeed; 
            _isWalk = true;

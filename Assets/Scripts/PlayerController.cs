@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,8 +16,11 @@ public class PlayerController : MonoBehaviour
     private float _timePunch = 0.75f;
     private bool _isAttack;
     public BoxCollider2D collider;
-
-
+    public BoxCollider2D colliderJab;
+    public BoxCollider2D colliderPunch;
+    public TextMeshProUGUI special;
+    public int enemyKilled = 0;
+    public GameOverScreen gameOverScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +28,9 @@ public class PlayerController : MonoBehaviour
         _playerRigidbody2D = GetComponent<Rigidbody2D>();
         _playerAnimator = GetComponent<Animator>();
         collider.enabled = false;
+        colliderJab.enabled = false;
+        colliderPunch.enabled = false;
+        special.text = $"Despertar {enemyKilled}/5";
     }
 
     // Update is called once per frame
@@ -32,7 +39,11 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
         UpdateAnimator();
 
-        if(Input.GetKeyDown(KeyCode.X)) {
+        if(Input.GetKeyDown(KeyCode.P)) {
+            gameOverScreen.Pause();
+        }
+
+        if(Input.GetKeyDown(KeyCode.X) && !_isAttack) {
             if(!_isWalk) {
                 StartCoroutine(PunchController());
                 if(_punchCount < 2) {
@@ -91,11 +102,13 @@ public class PlayerController : MonoBehaviour
     void PlayerJab()
     {
         _playerAnimator.SetTrigger("isJab");
+         enableCollisionJab();
     }
 
     void PlayerPunch()
     {
         _playerAnimator.SetTrigger("isPunch");
+        enableCollisionPunch();
     }
 
     IEnumerator PunchController() 
@@ -118,5 +131,21 @@ public class PlayerController : MonoBehaviour
 
     public void enableCollision() {
         collider.enabled = true;
+    }
+
+    public void enableCollisionJab() {
+        colliderJab.enabled = true;
+    }
+
+    public void disableCollisionJab() {
+        colliderJab.enabled = false;
+    }
+
+    public void enableCollisionPunch() {
+        colliderPunch.enabled = true;
+    }
+
+    public void disableCollisionPunch() {
+        colliderPunch.enabled = false;
     }
 }

@@ -4,22 +4,25 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 
 public class EnemyHealth : MonoBehaviour
 {
 
     public int health;
-    public int maxHealth = 100;
+    public int maxHealth = 90;
     public Image red;
     public Image green;
     public TextMeshProUGUI text;
     public EnemyController enemyController;
+    public PlayerController playerController;
     public EnemyHealth enemyHealth;
     public Transform[] spawnPoints;
     public GameObject enemy;
     public GameObject clone;
     private int level = 1;
+    private int id;
 
     void Start()
     {
@@ -37,6 +40,11 @@ public class EnemyHealth : MonoBehaviour
             StartCoroutine(ReduceRedBar(greenScale));
             enemyController._enemyAnimator.SetTrigger("isDeath");
             enemyController._enemyRigidbody2D.isKinematic = true;
+            enemyController.enemyCount -= 1;
+            if(playerController.enemyKilled < 5) {
+                playerController.enemyKilled++;
+            }
+            playerController.special.text = $"Despertar {playerController.enemyKilled}/5";
             StartCoroutine(DestroyEnemy());
         } else {
             Vector3 greenScale = green.rectTransform.localScale;
@@ -54,21 +62,45 @@ public class EnemyHealth : MonoBehaviour
     IEnumerator DestroyEnemy() 
     {
         yield return new WaitForSeconds(1.2f);
-        Destroy(gameObject);
-        level++;
-        enemyController._enemyRigidbody2D.isKinematic = false;
-        text.text = $"Nivel {level}";
-        int randSpawnPoint = Random.Range(0, spawnPoints.Length);
-        clone = Instantiate(enemy, spawnPoints[randSpawnPoint].position, Quaternion.identity);
+
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Enemy").Where(obj => obj.activeInHierarchy).ToArray();
+        
+        Debug.Log($"enemies {objectsWithTag.Length} id {id} level {level}");
+
+        if (enemyController.enemyCount == 0 && objectsWithTag.Length == 1)
+        {
+            Destroy(gameObject);
+            level++;
+            enemyController.enemyCount = level;
+            text.text = $"Nivel {level}";
+            SpawnEnemies();
+        } else if (enemyController.enemyCount == 0 && objectsWithTag.Length <= 2 && (id+1) == level)
+        {
+            Destroy(gameObject);
+            level++;
+            enemyController.enemyCount = level;
+            text.text = $"Nivel {level}";
+            SpawnEnemies();
+        } else {
+            Destroy(gameObject);
+        }
+    }
+
+    private void SpawnEnemies(){
+    for (int i = 0; i < level; i++) 
+    {
+        Vector3 spawnPosition = spawnPoints[0].position + Random.insideUnitSphere * 2f;
+        spawnPosition.z = 0f; 
+        
+        GameObject clone = Instantiate(enemy, spawnPosition, Quaternion.identity);
         clone.SetActive(true);
+        
         EnemyHealth cloneEnemyHealth = clone.GetComponent<EnemyHealth>();
-        enemyHealth = cloneEnemyHealth;
-        // EnemyController cloneEnemyController = clone.GetComponent<EnemyController>();
-        // enemyController = cloneEnemyController;
-        // enemyController.enemyLevel = enemyController.enemyLevel
-        enemyHealth.enemy = enemy;
-        enemyHealth.level = level;
-        Debug.Log($"Nivel {level}");
+        
+        cloneEnemyHealth.enemy = enemy;
+        cloneEnemyHealth.level = level;
+        cloneEnemyHealth.id = i;
+    }
     }
 
     IEnumerator ReduceRedBar(Vector3 newScale) 

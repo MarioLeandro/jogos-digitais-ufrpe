@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -13,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     public Image red;
     public Image green;
     public PlayerController playerController;
+    public GameOverScreen gameOverScreen;
 
 
     void Start()
@@ -22,17 +22,16 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int amount) {
         health -= amount;
-        Debug.Log(health);
         playerController._playerAnimator.SetTrigger("isHurt");
         if(health <= 0) {
-            Debug.Log("morreu");
-            Scene currentScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(currentScene.name);
+            gameOverScreen.Setup();
+        } else {
+            Vector3 greenScale = green.rectTransform.localScale;
+            greenScale.x = (float)health / maxHealth;
+            green.rectTransform.localScale = greenScale;
+            StartCoroutine(ReduceRedBar(greenScale));
         }
-        Vector3 greenScale = green.rectTransform.localScale;
-        greenScale.x = (float)health / maxHealth;
-        green.rectTransform.localScale = greenScale;
-        StartCoroutine(ReduceRedBar(greenScale));
+        
     }
 
     IEnumerator ReduceRedBar(Vector3 newScale) 
