@@ -9,7 +9,7 @@ public class PlayerDamageJab : MonoBehaviour
 
     [SerializeField] PlayerHealth playerHealth;
 
-    public int _damage = 20;
+    public int _damage = 15;
 
     [SerializeField] GameObject aura;
     // Start is called before the first frame update
@@ -26,8 +26,8 @@ public class PlayerDamageJab : MonoBehaviour
             playerController.enemyKilled = 0;
             playerController.special.text = $"Despertar {playerController.enemyKilled}/5";
             aura.SetActive(true);
-            _damage *= 2;
-            playerHealth.TakeDamage(playerHealth.health / 2);
+            _damage *= 3;
+            playerHealth.TakeDamage(playerHealth.health / 3);
             StartCoroutine(Awakening());
         }
         
@@ -35,10 +35,10 @@ public class PlayerDamageJab : MonoBehaviour
 
     IEnumerator Awakening() 
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
 
         aura.SetActive(false);
-        _damage /= 2;
+        _damage /= 3;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

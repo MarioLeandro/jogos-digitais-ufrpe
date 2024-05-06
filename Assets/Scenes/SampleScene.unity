@@ -551,7 +551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 1411205409}
   enemyController: {fileID: 2073447919}
-  _damage: 20
+  _damage: 10
 --- !u!1 &119816220
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,7 +760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2507995551870639477, guid: 508ffa040170a8847a6dcf9fed74ce6b, type: 3}
       propertyPath: _damage
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2507995551870639477, guid: 508ffa040170a8847a6dcf9fed74ce6b, type: 3}
       propertyPath: playerHealth
@@ -775,13 +775,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 386519882}
     - target: {fileID: 3808327969210088984, guid: 508ffa040170a8847a6dcf9fed74ce6b, type: 3}
+      propertyPath: enemyController
+      value: 
+      objectReference: {fileID: 386519887}
+    - target: {fileID: 3808327969210088984, guid: 508ffa040170a8847a6dcf9fed74ce6b, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1411205403}
     - target: {fileID: 3808327969210088984, guid: 508ffa040170a8847a6dcf9fed74ce6b, type: 3}
+      propertyPath: spawnPoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3808327969210088984, guid: 508ffa040170a8847a6dcf9fed74ce6b, type: 3}
       propertyPath: spawnPoints.Array.data[0]
       value: 
       objectReference: {fileID: 1422173349}
+    - target: {fileID: 3808327969210088984, guid: 508ffa040170a8847a6dcf9fed74ce6b, type: 3}
+      propertyPath: spawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 270958395}
     - target: {fileID: 3965376855451390016, guid: 508ffa040170a8847a6dcf9fed74ce6b, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
       value: 2304
@@ -841,6 +853,10 @@ PrefabInstance:
     - target: {fileID: 6680618709584034201, guid: 508ffa040170a8847a6dcf9fed74ce6b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680618709584034201, guid: 508ffa040170a8847a6dcf9fed74ce6b, type: 3}
+      propertyPath: m_TagString
+      value: EnemyBody
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1115,6 +1131,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &270958394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 270958395}
+  - component: {fileID: 270958396}
+  m_Layer: 0
+  m_Name: Spawner2
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &270958395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270958394}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.59, y: -3, z: -5.306189}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &270958396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270958394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed6754d694957c418d41cdaa31832a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &294339478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,7 +1346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 1411205403}
   playerHealth: {fileID: 1411205409}
-  _damage: 20
+  _damage: 15
   aura: {fileID: 119816220}
 --- !u!1 &311473458
 GameObject:
@@ -1380,7 +1440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 1411205403}
   playerHealth: {fileID: 1411205409}
-  _damage: 20
+  _damage: 25
   aura: {fileID: 119816220}
 --- !u!1 &369796736
 GameObject:
@@ -1549,6 +1609,17 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 7062977736877176863, guid: 508ffa040170a8847a6dcf9fed74ce6b, type: 3}
   m_PrefabInstance: {fileID: 212793086}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &386519887 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5291673819293242117, guid: 508ffa040170a8847a6dcf9fed74ce6b, type: 3}
+  m_PrefabInstance: {fileID: 212793086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386519882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b7d8570b2746d4ea7e24f35c1fec49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &397839667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,7 +2001,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.334979, y: -2.10657, z: -10}
+  m_LocalPosition: {x: -12.335075, y: -2.10658, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4284,6 +4355,7 @@ MonoBehaviour:
   special: {fileID: 1592144505}
   enemyKilled: 0
   gameOverScreen: {fileID: 1531332709}
+  enemyCount: 1
 --- !u!212 &1411205404
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4524,7 +4596,7 @@ Transform:
   m_GameObject: {fileID: 1422173347}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.76, y: -3, z: -5.306189}
+  m_LocalPosition: {x: 20.482, y: -3, z: -5.306189}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5841,7 +5913,7 @@ GameObject:
   - component: {fileID: 2073447919}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: EnemyBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5955,7 +6027,7 @@ Transform:
   m_GameObject: {fileID: 2073447913}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.732, y: -2.438, z: 0}
+  m_LocalPosition: {x: 16.51, y: -2.438, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5988,7 +6060,6 @@ MonoBehaviour:
   _timePunch: 1
   collider: {fileID: 96711225}
   enemyLevel: 1
-  enemyCount: 1
 --- !u!114 &2073447921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6011,6 +6082,7 @@ MonoBehaviour:
   enemyHealth: {fileID: 0}
   spawnPoints:
   - {fileID: 1422173349}
+  - {fileID: 270958395}
   enemy: {fileID: 386519882}
   clone: {fileID: 0}
 --- !u!1 &2094370305
@@ -6505,4 +6577,5 @@ SceneRoots:
   - {fileID: 2056546744}
   - {fileID: 244679108}
   - {fileID: 1422173349}
+  - {fileID: 270958395}
   - {fileID: 212793086}

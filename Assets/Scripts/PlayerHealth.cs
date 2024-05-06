@@ -23,6 +23,9 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int amount) {
         health -= amount;
         playerController._playerAnimator.SetTrigger("isHurt");
+        playerController.collider.enabled = false;
+        playerController.colliderJab.enabled = false;
+        playerController.colliderPunch.enabled = false;
         if(health <= 0) {
             gameOverScreen.Setup();
         } else {

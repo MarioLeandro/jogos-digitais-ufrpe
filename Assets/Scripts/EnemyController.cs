@@ -16,7 +16,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float _timePunch = 2;
     public BoxCollider2D collider;
     public int enemyLevel = 1;
-    public int enemyCount = 1;
 
 
    /*  public bool _isWalk;
@@ -32,6 +31,7 @@ public class EnemyController : MonoBehaviour
         _oPlayer = FindObjectOfType<PlayerController>().gameObject;
         _enemyAnimator = GetComponent<Animator>();
         collider.enabled = false;
+        _enemySpeed = Random.Range(1.5f, 2f);
     }
 
     // Update is called once per frame
@@ -146,6 +146,7 @@ public class EnemyController : MonoBehaviour
            _enemyDirection = (_oPlayer.transform.position - transform.position).normalized;
            _enemyRigidbody2D.velocity = _enemyDirection * _enemySpeed; 
            _isWalk = true;
+           disableCollision();
         } else {
             _enemyRigidbody2D.velocity = Vector2.zero;
             _isWalk = false;

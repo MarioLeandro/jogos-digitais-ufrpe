@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI special;
     public int enemyKilled = 0;
     public GameOverScreen gameOverScreen;
+    public int enemyCount = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -47,9 +48,11 @@ public class PlayerController : MonoBehaviour
             if(!_isWalk) {
                 StartCoroutine(PunchController());
                 if(_punchCount < 2) {
+                    disableCollisionPunch();
                     PlayerJab();
                     _punchCount++;
                 } else if(_punchCount >= 2){
+                    disableCollisionJab();
                     PlayerPunch();
                     _punchCount = 0;
                 }

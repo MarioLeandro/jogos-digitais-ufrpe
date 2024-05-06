@@ -25,8 +25,8 @@ public class PlayerDamage : MonoBehaviour
             playerController.enemyKilled = 0;
             playerController.special.text = $"Despertar {playerController.enemyKilled}/5";
             aura.SetActive(true);
-            _damage *= 2;
-            playerHealth.TakeDamage(playerHealth.health / 2);
+            _damage *= 3;
+            playerHealth.TakeDamage(playerHealth.health / 3);
             StartCoroutine(Awakening());
         }
         
@@ -34,11 +34,10 @@ public class PlayerDamage : MonoBehaviour
 
     IEnumerator Awakening() 
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
 
         aura.SetActive(false);
-        _damage /= 2;
-        playerController.enemyKilled = 0;
+        _damage /= 3;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

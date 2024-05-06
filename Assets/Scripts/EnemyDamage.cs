@@ -6,7 +6,7 @@ public class EnemyDamage : MonoBehaviour
 {
     public PlayerHealth playerHealth;
     public EnemyController enemyController;
-    public int _damage = 20;
+    public int _damage = 10;
     // Start is called before the first frame update
     void Start()
     {
